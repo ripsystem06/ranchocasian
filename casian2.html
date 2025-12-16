@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rancho Los Casian | Parque Ecoturístico</title>
+    <meta name="description" content="Albercas, Cabañas y Off-Road en Ojos Negros, BC.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-orange': '#ff6b00',
+                        'brand-green': '#1a4d2e',
+                        'brand-cream': '#fffbeb',
+                        'brand-blue': '#00a8e8',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        heading: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* --- SLIDER HERO --- */
+        .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .hero-slide.active { opacity: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(26, 77, 46, 0.6)); z-index: 1; }
+        
+        /* --- ANIMACIONES SCROLL REVEAL --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- UI ELEMENTS --- */
+        .dynamic-title { font-family: 'Roboto', sans-serif; font-weight: 900; font-style: italic; letter-spacing: -0.02em; }
+        .text-shadow { text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2); }
+
+        .btn-primary { background: linear-gradient(135deg, #ff6b00, #e65100); box-shadow: 0 4px 0px #b33e00; transition: all 0.1s; }
+        .btn-primary:active { transform: translateY(4px); box-shadow: 0 0 0 #b33e00; }
+        .btn-primary:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 6px 0px #b33e00; }
+    </style>
+</head>
+<body class="bg-brand-cream text-gray-700 font-sans antialiased">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4 border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl dynamic-title text-white tracking-wide uppercase drop-shadow-md flex items-center">
+                        <i class="fa-solid fa-mountain-sun mr-2 text-brand-orange"></i>
+                        <span>Los Casian</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-white hover:text-brand-orange transition font-semibold text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="#promociones" class="text-white hover:text-brand-orange transition font-semibold text-sm uppercase tracking-wide">Ofertas</a>
+                    <a href="#nosotros" class="text-white hover:text-brand-orange transition font-semibold text-sm uppercase tracking-wide">El Rancho</a>
+                    <a href="#experiencias" class="text-white hover:text-brand-orange transition font-semibold text-sm uppercase tracking-wide">Atracciones</a>
+                    <a href="#contacto" class="btn-primary text-white px-6 py-2 rounded-full font-bold uppercase text-sm tracking-wider">Reservar</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-3xl drop-shadow-md"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute w-full left-0 top-full shadow-2xl border-t border-gray-100">
+            <a href="#inicio" class="block py-4 px-6 text-sm font-bold hover:bg-orange-50 text-brand-green border-b uppercase">Inicio</a>
+            <a href="#promociones" class="block py-4 px-6 text-sm font-bold hover:bg-orange-50 text-brand-green border-b uppercase">Ofertas</a>
+            <a href="#nosotros" class="block py-4 px-6 text-sm font-bold hover:bg-orange-50 text-brand-green border-b uppercase">El Rancho</a>
+            <a href="#experiencias" class="block py-4 px-6 text-sm font-bold hover:bg-orange-50 text-brand-green border-b uppercase">Atracciones</a>
+            <a href="#contacto" class="block py-4 px-6 text-sm font-bold bg-brand-orange text-white uppercase">Reservar</a>
+        </div>
+    </nav>
+
+    <header id="inicio" class="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('casianassets/slidelaberca1.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('casianassets/slidealberca2.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('casianassets/slidelaberca3.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 max-w-5xl mx-auto animate-fade-in-up">
+            <span class="inline-block bg-brand-orange text-white font-bold tracking-widest uppercase mb-6 text-xs px-4 py-1 rounded skew-x-[-10deg]">
+                <span class="skew-x-[10deg] inline-block">📍 Ojos Negros, BC</span>
+            </span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl dynamic-title text-white mb-6 text-shadow leading-none">
+                AVENTURA Y <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-brand-orange">DIVERSIÓN TOTAL</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-100 mb-10 max-w-2xl mx-auto text-shadow font-medium">
+                Albercas refrescantes. Adrenalina Off-Road. Cabañas bajo las estrellas.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                <a href="#promociones" class="bg-white text-brand-green hover:bg-gray-100 px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl transform hover:-translate-y-1">
+                    Ver Ofertas
+                </a>
+                <a href="#contacto" class="btn-primary text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition transform">
+                    <i class="fa-solid fa-ticket mr-2"></i>Reservar Fecha
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+            <a href="#promociones" class="text-white text-3xl opacity-80 hover:opacity-100 transition"><i class="fa-solid fa-chevron-down"></i></a>
+        </div>
+    </header>
+
+    <section id="promociones" class="bg-gray-900 py-16 -mt-2 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal">
+                <h2 class="text-3xl dynamic-title text-white uppercase italic">🔥 Ofertas de Temporada</h2>
+                <p class="text-gray-400">Aprovecha estos descuentos limitados.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-r from-brand-orange to-red-600 rounded-2xl p-1 shadow-lg transform hover:scale-[1.02] transition duration-300 reveal">
+                    <div class="bg-gray-900 rounded-xl p-6 h-full flex flex-col sm:flex-row items-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-yellow-400 text-black text-xs font-bold px-3 py-1 uppercase transform translate-x-2 -translate-y-1 rotate-3">Limitado</div>
+                        <div class="text-5xl text-brand-orange mr-6 mb-4 sm:mb-0"><i class="fa-solid fa-users"></i></div>
+                        <div class="text-center sm:text-left flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-1 uppercase italic">2x1 En Entradas</h3>
+                            <p class="text-gray-300 text-sm mb-4">Válido de Martes a Jueves.</p>
+                            <a href="#contacto" class="inline-block bg-white text-brand-orange font-bold text-xs px-4 py-2 rounded uppercase tracking-wide hover:bg-gray-100 transition">Reclamar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-brand-blue to-cyan-500 rounded-2xl p-1 shadow-lg transform hover:scale-[1.02] transition duration-300 reveal">
+                    <div class="bg-gray-900 rounded-xl p-6 h-full flex flex-col sm:flex-row items-center relative overflow-hidden">
+                        <div class="text-5xl text-brand-blue mr-6 mb-4 sm:mb-0"><i class="fa-solid fa-cake-candles"></i></div>
+                        <div class="text-center sm:text-left flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-1 uppercase italic">Cumpleañero Gratis</h3>
+                            <p class="text-gray-300 text-sm mb-4">¡Celebra con nosotros!</p>
+                            <a href="#contacto" class="inline-block bg-white text-brand-blue font-bold text-xs px-4 py-2 rounded uppercase tracking-wide hover:bg-gray-100 transition">Agendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="nosotros" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:flex items-center gap-16">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 reveal">
+                    <div class="relative">
+                        <div class="absolute -top-4 -left-4 w-full h-full border-4 border-brand-orange rounded-3xl z-0"></div>
+                        <img src="casianassets/slidealberca4.jpg" alt="Paisaje Ojos Negros" class="rounded-3xl shadow-2xl relative z-10 w-full object-cover h-[500px]">
+                        
+                        <div class="absolute bottom-8 -right-4 bg-white p-4 rounded-xl shadow-xl z-20 flex items-center gap-4">
+                            <div class="bg-brand-green text-white p-3 rounded-full">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-bold">Ubicación</p>
+                                <p class="text-brand-dark font-bold">Ruta del Queso y Vino</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 reveal">
+                    <span class="text-brand-orange font-bold uppercase tracking-widest text-sm mb-2 block">El Destino</span>
+                    <h2 class="text-4xl md:text-5xl dynamic-title text-brand-green mb-6">UN OASIS EN OJOS NEGROS</h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        Más que un parque, somos el corazón de la aventura en el valle. Ubicados estratégicamente en la entrada a la legendaria Ruta del Queso y el Vino, ofrecemos el equilibrio perfecto entre la adrenalina del desierto y la paz del campo.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        Aquí el tiempo se detiene. Ya sea disfrutando de un vino local bajo los encinos o acelerando en las pistas, Los Casian es tu casa fuera de casa.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-clock text-brand-orange text-2xl"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">40 Minutos</p>
+                                <p class="text-xs text-gray-500">De Ensenada</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-shield-halved text-brand-orange text-2xl"></i>
+                            <div>
+                                <p class="font-bold text-gray-800">100% Seguro</p>
+                                <p class="text-xs text-gray-500">Ambiente Familiar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="experiencias" class="py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12 reveal">
+                <div>
+                    <span class="text-brand-orange font-bold uppercase tracking-widest text-sm">Experiencias</span>
+                    <h2 class="text-4xl md:text-5xl dynamic-title text-brand-green mt-2">ELIGE TU AVENTURA</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="reveal bg-white rounded-3xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="casianassets/alberca.png" alt="Albercas" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-brand-blue text-white text-xs font-black italic px-4 py-1 rounded skew-x-[-10deg] shadow-lg">DAY PASS</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl dynamic-title text-brand-green mb-2">CLUB ACUÁTICO</h3>
+                        <p class="text-gray-600 mb-6">El plan perfecto para el calor. Trae a tu familia.</p>
+                        <a href="#contacto" class="text-brand-orange font-bold hover:text-orange-600 uppercase text-sm tracking-wide transition-all">Consultar Precios <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-3xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300" style="transition-delay: 200ms;">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="casianassets/offroad.png" alt="Motos Off Road" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-brand-orange text-white text-xs font-black italic px-4 py-1 rounded skew-x-[-10deg] shadow-lg">ADRENALINA</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl dynamic-title text-brand-green mb-2">RENTA DE MOTOS</h3>
+                        <p class="text-gray-600 mb-6">Siente la velocidad en senderos seguros. Renta nuestras motos.</p>
+                        <a href="#contacto" class="text-brand-orange font-bold hover:text-orange-600 uppercase text-sm tracking-wide transition-all">Reservar Moto <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="reveal bg-white rounded-3xl overflow-hidden shadow-lg group hover:-translate-y-2 transition duration-300" style="transition-delay: 400ms;">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="casianassets/cabañas.png" alt="Cabañas" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 right-4 bg-brand-green text-white text-xs font-black italic px-4 py-1 rounded skew-x-[-10deg] shadow-lg">HOSPEDAJE</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl dynamic-title text-brand-green mb-2">CABAÑAS RÚSTICAS</h3>
+                        <p class="text-gray-600 mb-6">Desconecta del wifi y conecta con las estrellas.</p>
+                        <a href="#contacto" class="text-brand-orange font-bold hover:text-orange-600 uppercase text-sm tracking-wide transition-all">Ver Disponibilidad <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="restaurante" class="py-24 bg-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:flex lg:items-start lg:gap-20">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 reveal">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl h-[500px] border-8 border-white rotate-1 hover:rotate-0 transition duration-500">
+                        <img src="casianassets/restaurante.jpg" alt="Restaurante Jardín Casian" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-10">
+                            <h3 class="text-white dynamic-title text-3xl">JARDÍN CASIAN</h3>
+                            <p class="text-yellow-400 font-bold italic">Cocina de Campo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex flex-col justify-center h-full pt-10 reveal">
+                    <span class="text-brand-orange font-bold uppercase tracking-widest text-sm mb-3 block">Del Campo a tu Mesa</span>
+                    <h2 class="text-5xl md:text-6xl dynamic-title text-brand-green mb-6">SABOR AUTÉNTICO</h2>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        Prueba nuestros famosos <strong>desayunos de rancho</strong> y cortes a las brasas. Ingredientes locales, sabor casero y la mejor vista.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-5 mb-8">
+                        <button id="btnShowMenu" class="flex items-center justify-center bg-brand-green hover:bg-green-900 text-white font-bold py-4 px-10 rounded-full transition shadow-xl cursor-pointer">
+                            <i class="fa-solid fa-book-open mr-2"></i> Ver Menú
+                        </button>
+                        <button onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})" class="flex items-center justify-center border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-bold py-4 px-10 rounded-full transition">
+                            Reservar Mesa
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="menuGallery" class="hidden mt-12 bg-gray-50 p-6 rounded-3xl border border-gray-200 shadow-inner">
+                <div class="flex justify-between items-center mb-6">
+                    <h4 class="text-2xl dynamic-title text-brand-green">NUESTRA CARTA</h4>
+                    <button id="btnHideMenu" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg font-bold transition">
+                        <i class="fa-solid fa-times mr-2"></i> Cerrar
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <img src="casianassets/desyauno.png" class="w-full h-auto rounded-xl shadow-lg">
+                    <img src="casianassets/comida.png" class="w-full h-auto rounded-xl shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ia-planner" class="py-24 bg-gradient-to-br from-gray-900 to-brand-green text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-orange opacity-20 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <span class="bg-white/10 backdrop-blur px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide border border-white/20">Asistente Virtual</span>
+                <h2 class="text-4xl md:text-5xl dynamic-title mt-4 mb-4">ARMA TU PLAN PERFECTO</h2>
+                <p class="text-gray-300 text-lg">¿No sabes qué hacer primero? Nuestra IA te sugiere un itinerario.</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl">
+                <form id="ai-planner-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-gray-300 font-bold mb-2 text-sm uppercase">Me gusta...</label>
+                            <select id="ai-style" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-600 text-white focus:border-brand-orange focus:ring-1 focus:ring-brand-orange outline-none">
+                                <option value="Adrenalina Total (Motos y Offroad)">🏍️ Adrenalina</option>
+                                <option value="Relax Familiar y Alberca">🏊 Relax y Alberca</option>
+                                <option value="Romántico y Cabañas">🍷 Pareja y Vinos</option>
+                                <option value="Gastronómico">🍽️ Solo a comer</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 font-bold mb-2 text-sm uppercase">Tiempo</label>
+                            <select id="ai-duration" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-600 text-white focus:border-brand-orange focus:ring-1 focus:ring-brand-orange outline-none">
+                                <option value="Pasar el día">☀️ Solo el día</option>
+                                <option value="Fin de Semana">🌙 Fin de Semana</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 font-bold mb-2 text-sm uppercase">Compañía</label>
+                            <select id="ai-group" class="w-full p-4 rounded-xl bg-gray-800 border border-gray-600 text-white focus:border-brand-orange focus:ring-1 focus:ring-brand-orange outline-none">
+                                <option value="Familia con niños">Familia con niños</option>
+                                <option value="Pareja">Pareja</option>
+                                <option value="Grupo de Amigos">Grupo de Amigos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" id="generate-btn" class="w-full btn-primary text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:scale-[1.01]">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Generar Itinerario Mágico
+                    </button>
+                </form>
+                <div id="ai-result" class="mt-8 hidden bg-white text-gray-800 p-8 rounded-2xl animate-fade-in-up shadow-xl">
+                    <h3 class="text-xl font-bold text-brand-green mb-4"><i class="fa-solid fa-star text-yellow-500 mr-2"></i>Tu Plan Ideal:</h3>
+                    <div id="ai-content" class="text-gray-700 leading-relaxed ai-response text-lg"></div>
+                </div>
+                <div id="ai-loading" class="hidden mt-8 text-center">
+                    <i class="fa-solid fa-circle-notch fa-spin text-4xl text-brand-orange"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 bg-brand-cream">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                <div class="bg-brand-green p-12 text-white md:w-2/5 flex flex-col justify-center relative overflow-hidden">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-white opacity-10 rounded-full"></div>
+                    <h3 class="text-3xl dynamic-title mb-6">CONTÁCTANOS</h3>
+                    <p class="mb-8 text-white/80 text-lg">Reserva tu cabaña o mesa con anticipación.</p>
+                    <ul class="space-y-6 text-lg">
+                        <li class="flex items-center"><i class="fa-brands fa-whatsapp text-2xl mr-4 text-brand-orange"></i> (646) 123-4567</li>
+                        <li class="flex items-center"><i class="fa-solid fa-envelope text-2xl mr-4 text-brand-orange"></i> info@rancholoscasian.com</li>
+                    </ul>
+                </div>
+                <div class="p-12 md:w-3/5">
+                    <h3 class="text-3xl dynamic-title text-brand-green mb-8">ENVIAR MENSAJE</h3>
+                    <form id="leadForm">
+                        <input type="hidden" name="fecha" id="fecha_input">
+                        <input type="hidden" name="origen" value="Landing_Turismo">
+                        
+                        <div class="mb-5">
+                            <label class="block text-gray-700 text-sm font-bold mb-2 uppercase tracking-wide">Nombre</label>
+                            <input name="nombre" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white transition" type="text" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="mb-5">
+                            <label class="block text-gray-700 text-sm font-bold mb-2 uppercase tracking-wide">Me interesa:</label>
+                            <select name="interes" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white transition">
+                                <option value="Rentar Cabaña">Rentar Cabaña</option>
+                                <option value="Información Albercas">Información Albercas (Day Pass)</option>
+                                <option value="Eventos">Eventos / Grupos grandes</option>
+                            </select>
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-gray-700 text-sm font-bold mb-2 uppercase tracking-wide">Teléfono / WhatsApp</label>
+                            <input name="telefono" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-orange focus:bg-white transition" type="tel" placeholder="(646) ..." required>
+                        </div>
+                        <button type="submit" id="submitBtn" class="w-full btn-primary text-white font-bold py-4 rounded-xl text-lg transition shadow-lg">
+                            ENVIAR SOLICITUD
+                        </button>
+                        <p id="formStatus" class="text-xs text-center text-gray-500 mt-4"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative bg-brand-green overflow-hidden border-t-8 border-brand-orange">
+        <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center mix-blend-overlay z-0"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 reveal">
+            <span class="inline-block bg-white text-brand-green font-bold text-xs px-3 py-1 rounded mb-4 uppercase tracking-widest">Oportunidad de Inversión</span>
+            <h2 class="text-4xl md:text-5xl dynamic-title text-white mb-6">¿TE ENAMORASTE DEL LUGAR?</h2>
+            <p class="text-xl text-gray-100 mb-8 font-medium max-w-2xl mx-auto">
+                No seas solo un visitante. Adquiere tu propio terreno campestre en Rancho Los Casian y disfruta de estas amenidades siempre.
+            </p>
+            <a href="index.html" class="inline-flex items-center justify-center bg-brand-orange hover:bg-orange-600 text-white font-black text-lg py-4 px-10 rounded-full transition transform hover:scale-105 shadow-2xl uppercase tracking-wide">
+                <i class="fa-solid fa-house-chimney mr-3"></i> Ver Lotes en Venta
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <h3 class="text-2xl dynamic-title text-white mb-4 flex items-center">
+                        <i class="fa-solid fa-mountain-sun text-brand-orange mr-2"></i> LOS CASIAN
+                    </h3>
+                    <p class="text-sm leading-relaxed mb-6 text-gray-400">
+                        El destino definitivo para conectar con la naturaleza, la adrenalina y la buena comida en el corazón de Baja California.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-orange hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-orange hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-6 border-b-2 border-brand-orange inline-block pb-2">Explora</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#inicio" class="hover:text-brand-orange transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2 text-gray-600"></i> Inicio</a></li>
+                        <li><a href="#experiencias" class="hover:text-brand-orange transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2 text-gray-600"></i> Atracciones</a></li>
+                        <li><a href="#restaurante" class="hover:text-brand-orange transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2 text-gray-600"></i> Restaurante</a></li>
+                        <li><a href="landing-inmobiliaria.html" class="text-brand-orange font-bold hover:text-white transition flex items-center"><i class="fa-solid fa-star text-xs mr-2"></i> Comprar Terreno</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-6 border-b-2 border-brand-orange inline-block pb-2">Visítanos</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-brand-orange"></i>
+                            <span>Carretera Ensenada - San Felipe Km 40, Ojos Negros, B.C.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone mr-3 text-brand-orange"></i>
+                            <span>+52 (646) 123-4567</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-6 border-b-2 border-brand-orange inline-block pb-2">Ubicación</h4>
+                    <div class="rounded-xl overflow-hidden h-40 relative group cursor-pointer border border-gray-700">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="bg-brand-orange text-white text-xs font-bold px-3 py-2 rounded shadow-lg transform group-hover:scale-110 transition">
+                                <i class="fa-solid fa-map-location-dot mr-1"></i> Ver en Maps
+                            </span>
+                        </div>
+                        <a href="https://maps.app.goo.gl/Nj2zSGqG2D1tnNJZ7" target="_blank" class="absolute inset-0 z-10"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-xs text-gray-500">
+                <p>&copy; 2025 Rancho Los Casian. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/526461234567?text=Hola,%20vi%20su%20página%20web%20y%20me%20interesa%20visitar%20el%20Rancho." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-2xl transition transform hover:scale-110 flex items-center justify-center group">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping group-hover:hidden"></span>
+        <i class="fa-brands fa-whatsapp text-4xl relative z-10"></i>
+    </a>
+
+    <script>
+        // 1. MENU
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
+
+        // 2. HERO SLIDER
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000);
+
+        // 3. ANIMATIONS
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 4. NAVBAR
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const logo = nav.querySelector('a');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white', 'shadow-md', 'py-2');
+                nav.classList.remove('bg-transparent', 'py-4', 'border-b');
+                logo.classList.remove('text-white');
+                logo.classList.add('text-brand-green');
+                nav.querySelectorAll('.hidden.md\\:flex a').forEach(el => {
+                    if(!el.classList.contains('btn-primary')) { el.classList.remove('text-white'); el.classList.add('text-brand-green'); }
+                });
+                document.querySelector('#mobile-menu-btn i').classList.remove('text-white');
+                document.querySelector('#mobile-menu-btn i').classList.add('text-brand-green');
+            } else {
+                nav.classList.remove('bg-white', 'shadow-md', 'py-2');
+                nav.classList.add('bg-transparent', 'py-4', 'border-b');
+                logo.classList.add('text-white');
+                logo.classList.remove('text-brand-green');
+                nav.querySelectorAll('.hidden.md\\:flex a').forEach(el => {
+                    if(!el.classList.contains('btn-primary')) { el.classList.add('text-white'); el.classList.remove('text-brand-green'); }
+                });
+                document.querySelector('#mobile-menu-btn i').classList.add('text-white');
+                document.querySelector('#mobile-menu-btn i').classList.remove('text-brand-green');
+            }
+        });
+
+        // 5. RESTAURANT MENU
+        document.getElementById('btnShowMenu').addEventListener('click', () => {
+            document.getElementById('menuGallery').classList.remove('hidden');
+            setTimeout(() => { document.getElementById('menuGallery').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+        });
+        document.getElementById('btnHideMenu').addEventListener('click', () => {
+            document.getElementById('menuGallery').classList.add('hidden');
+            document.getElementById('btnShowMenu').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // 6. GOOGLE SHEETS FORM (CONECTADO A LA HOJA DE TURISMO)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw3vJNkXTM8FeLSZHrCDGy8M8P-xJGCtY5OaTsqEki2SR-V_WCXt7aYrTQ0jxHDjuwP/exec'; // <--- ¡AQUÍ PEGA LA URL DEL WEB APP!
+        
+        const form = document.getElementById('leadForm');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const btnSubmit = document.getElementById('submitBtn');
+            const status = document.getElementById('formStatus');
+            const originalBtnText = btnSubmit.innerHTML;
+            document.getElementById('fecha_input').value = new Date().toLocaleString();
+            
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enviando...';
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    status.innerHTML = '<i class="fa-solid fa-check text-green-600"></i> ¡Recibido! Te contactaremos.';
+                    status.className = 'text-green-600 font-bold text-center mt-4';
+                    form.reset();
+                })
+                .catch(error => {
+                    status.innerHTML = 'Error de conexión.';
+                    status.className = 'text-red-500 text-center mt-4';
+                })
+                .finally(() => {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = originalBtnText;
+                });
+        });
+
+        // ⚠️ IMPORTANTE: Pega tu API Key dentro de las comillas abajo
+        // 4. PLANNER IA (CORREGIDO)
+        const apiKey = "AIzaSyBxGQKjqeZjaDpeayBMqmbQMUQaUQxi7go"; // <--- ¡ASEGÚRATE DE PEGAR TU KEY AQUÍ SIN ESPACIOS!
+        
+        async function callGemini(prompt) {
+            // CAMBIO: Usamos 'gemini-pro' que es el modelo más estable para evitar el error 404
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: prompt }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    // Si hay error, lo mostramos en consola para entender qué pasa
+                    console.error("Detalle del error API:", response.status, response.statusText);
+                    throw new Error(`Error en la API: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+
+            } catch (error) {
+                console.error("Error completo:", error);
+                return "Lo siento, el guía virtual está tomando un descanso. Por favor intenta de nuevo en unos segundos.";
+            }
+        }
+
+        document.getElementById('ai-planner-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const loading = document.getElementById('ai-loading');
+            const result = document.getElementById('ai-result');
+            const content = document.getElementById('ai-content');
+            
+            const style = document.getElementById('ai-style').value;
+            const duration = document.getElementById('ai-duration').value;
+            const group = document.getElementById('ai-group').value;
+
+            // Prompt diseñado para vender el parque
+            const prompt = `
+                Actúa como un guía turístico experto del "Rancho Los Casian" en Ojos Negros, Baja California.
+                Crea un itinerario breve (máximo 80 palabras) y divertido con emojis para:
+                - Perfil: ${style}
+                - Tiempo: ${duration}
+                - Grupo: ${group}
+                Se neutro, ya que el formulario no pide ingresar nombre, tu respuesta debe de ser neutra o bien aplicar un "Bienvenid@" o algo similar para dar el saludo
+                Menciona obligatoriamente nuestras atracciones: Albercas, Motos, Cabañas o Restaurante según el perfil. Usa negritas (<b>) para los lugares.
+                Tu idea de itinerario tiene que endulzar a el cliente y darle call to actions escodnidos en el para que se enamore y logre confirmar una reservacion
+                El intinerario debe de tener edicion y presentable, usa listas pero para el formato mas no como tablas 
+
+        
+            `;
+
+            loading.classList.remove('hidden');
+            result.classList.add('hidden');
+            
+            const text = await callGemini(prompt);
+            
+            // Convertir formato de texto a HTML simple
+            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
+            formattedText = formattedText.replace(/\n/g, '<br>'); 
+            
+            content.innerHTML = formattedText;
+            
+            loading.classList.add('hidden');
+            result.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
